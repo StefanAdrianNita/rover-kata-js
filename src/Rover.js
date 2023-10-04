@@ -10,6 +10,16 @@ export default class Rover {
     this.#grid = grid;
   }
 
+  get x() {
+    return this.#x;
+  }
+  get y() {
+    return this.#y;
+  }
+  get direction() {
+    return this.#direction;
+  }
+
   #checkForObstacle(y, x) {
     return this.#grid[y][x] === 1;
   }
