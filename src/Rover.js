@@ -82,13 +82,7 @@ export default class Rover {
             this.#consoleGUI();
         })
 
-        const charDir = {
-            90: "N",
-            180: "W",
-            270: "S",
-            0: "E"
-        }
-        return {hasObstacle, x: this.#x, y: this.#y, direction: charDir[this.#direction]};
+        return {hasObstacle, x: this.#x, y: this.#y, direction: this.#direction};
     }
 
     #consoleGUI() {
