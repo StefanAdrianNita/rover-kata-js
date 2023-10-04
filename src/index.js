@@ -1,15 +1,14 @@
 import {readInput, writeOutput} from './iostream.js';
 import Rover from './Rover.js';
 
+const startTime = Date.now();
+
 const inputArray = readInput('files/input.txt');
 
-// Extract Obstacles from inputArray
-const obstacleList = [];
-for(let i = 2; i < inputArray.length; i++) {
-    if(inputArray[i][0] === "Obstacle") {
-        obstacleList.push([inputArray[i][1], inputArray[i][2]]);
-    }
-}
+const obstacleList = inputArray.slice(2)
+                                .filter(([type]) => type === "Obstacle")
+                                .map(([, x, y]) => [x, y])
+
 
 // Using data from inputfile generate the grid
 let grid = [];
@@ -41,6 +40,10 @@ const rover = new Rover(grid);
 
 for(let i = 0; i < commandsList.length; i++) {
     const response = rover.execCommands(commandsList[i]);
-    console.log(response);
+    (response);
     writeOutput('files/output.txt', `${response.hasObstacle ? "O:": ""}${response.x}:${response.y}:${response.direction}`)
 }
+
+const endTime = Date.now();
+const timeElapsed = endTime - startTime;
+console.log(`Execution time: ${timeElapsed}ms`);

@@ -40,7 +40,7 @@ export default class Rover {
         }
 
         if(this.#checkForObstacle(...newPosition)) {
-            console.log("Obstacle detected");
+            ("Obstacle detected");
             return 1;
         }
         else {
@@ -60,7 +60,7 @@ export default class Rover {
             this.#direction = (this.#direction - 90 + 360) % 360;
         }
         else {
-            console.log("Invalid direction");
+            ("Invalid direction");
         }
 
     }
@@ -76,9 +76,9 @@ export default class Rover {
                 this.#turn(command);
             }
             else {
-                console.log("Invalid command");
+                ("Invalid command");
             }
-            console.log(`Rover is at ${this.#x}, ${this.#y}, facing ${this.#direction} degrees`);
+            (`Rover is at ${this.#x}, ${this.#y}, facing ${this.#direction} degrees`);
             this.#consoleGUI();
         })
 
@@ -95,7 +95,7 @@ export default class Rover {
         let grid = this.#grid;
         grid[this.#y][this.#x] = 8;
         grid.reverse();
-        console.log(grid);
+        (grid);
         grid.reverse();
         grid[this.#y][this.#x] = 0;
     }
