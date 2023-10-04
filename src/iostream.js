@@ -10,5 +10,6 @@ export const readInput = (input) => {
 };
 
 export const writeOutput = (output, data) => {
+  console.log(data);
   fs.appendFileSync(output, data + "\n");
 };
