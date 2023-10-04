@@ -34,7 +34,7 @@ for (let i = 2, len = inputArray.length; i < len; i++) {
   }
 }
 
-const rover = new Rover(grid);
+const rover = new Rover(0, 0, grid);
 
 // for(let i = 0; i < commandsList.length; i++) {
 //     const response = rover.execCommands(commandsList[i]);

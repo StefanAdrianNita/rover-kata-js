@@ -4,7 +4,9 @@ export default class Rover {
   #direction = 90;
   #grid;
 
-  constructor(grid) {
+  constructor(y, x, grid) {
+    this.#y = y;
+    this.#x = x;
     this.#grid = grid;
   }
 
@@ -16,7 +18,7 @@ export default class Rover {
     return (coord + max) % max;
   }
 
-  #moveForward() {
+  #move(fwd) {
     const directionMap = {
       90: { dy: 1, dx: 0 },
       180: { dy: 0, dx: -1 },
@@ -26,8 +28,8 @@ export default class Rover {
 
     const { dy, dx } = directionMap[this.#direction];
     const newPosition = [
-      this.#wrapAround(this.#y + dy, this.#grid.length),
-      this.#wrapAround(this.#x + dx, this.#grid[0].length),
+      this.#wrapAround(this.#y + (fwd ? dy : -dy), this.#grid.length),
+      this.#wrapAround(this.#x + (fwd ? dx : -dx), this.#grid[0].length),
     ];
 
     if (this.#checkForObstacle(...newPosition)) return 1;
@@ -52,13 +54,21 @@ export default class Rover {
     let hasObstacle = false;
     commandArray.forEach((command) => {
       if (command === "F") {
-        hasObstacle = this.#moveForward();
+        hasObstacle = this.#move(true);
       } else if (command === "L" || command === "R") {
         this.#turn(command);
+      } else if (command === "B") {
+        hasObstacle = this.#move(false);
       }
       console.log(
         `Rover is at ${this.#x}, ${this.#y}, facing ${this.#direction} degrees`
       );
+
+      this.#grid[this.#y][this.#x] = 5;
+      this.#grid.reverse();
+      console.log(this.#grid);
+      this.#grid.reverse();
+      this.#grid[this.#y][this.#x] = 0;
     });
 
     return { hasObstacle, x: this.#x, y: this.#y, direction: this.#direction };
