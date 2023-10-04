@@ -1,12 +1,14 @@
-import fs from 'fs';
+import fs from "fs";
 
 export const readInput = (input) => {
-    const data = fs.readFileSync(input, 'utf8');
-    const lines = data.split('\n');
-    const inputArray = lines.map(line => line.split(' '));
-    return inputArray;
-    };
+  try {
+    const data = fs.readFileSync(input, "utf8");
+    return data.split("\n").map((line) => line.trim().split(/\s+/));
+  } catch (err) {
+    throw new Error(err);
+  }
+};
 
 export const writeOutput = (output, data) => {
-    fs.appendFileSync(output, data + '\n');
-    }
+  fs.appendFileSync(output, data + "\n");
+};
