@@ -8,5 +8,5 @@ export const readInput = (input) => {
     };
 
 export const writeOutput = (output, data) => {
-    fs.writeFileSync(output, data);
+    fs.appendFileSync(output, data + '\n');
     }

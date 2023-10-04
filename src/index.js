@@ -41,5 +41,6 @@ const rover = new Rover(grid);
 
 for(let i = 0; i < commandsList.length; i++) {
     const response = rover.execCommands(commandsList[i]);
+    console.log(response);
     writeOutput('files/output.txt', `${response.hasObstacle ? "O:": ""}${response.x}:${response.y}:${response.direction}`)
 }

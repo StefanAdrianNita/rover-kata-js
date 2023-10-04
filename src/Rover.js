@@ -93,7 +93,10 @@ export default class Rover {
 
     #consoleGUI() {
         let grid = this.#grid;
-        grid[this.#y][this.#x] = 2;
+        grid[this.#y][this.#x] = 8;
+        grid.reverse();
         console.log(grid);
+        grid.reverse();
+        grid[this.#y][this.#x] = 0;
     }
 }
