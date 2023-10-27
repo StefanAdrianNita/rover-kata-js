@@ -42,11 +42,11 @@ export default class Rover {
       this.#wrapAround(this.#x + (fwd ? dx : -dx), this.#grid[0].length),
     ];
 
-    if (this.#checkForObstacle(...newPosition)) return 1;
+    if (this.#checkForObstacle(...newPosition)) return true;
 
     this.#y = newPosition[0];
     this.#x = newPosition[1];
-    return 0;
+    return false;
   }
 
   #turn(direction) {

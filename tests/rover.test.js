@@ -81,21 +81,21 @@ describe("Rover", () => {
     let response = rover.execCommands("RFF");
     expect(response).toStrictEqual({
       direction: 0,
-      hasObstacle: 1,
+      hasObstacle: true,
       x: 1,
       y: 0,
     });
     response = rover.execCommands("RF");
     expect(response).toStrictEqual({
       direction: 270,
-      hasObstacle: 0,
+      hasObstacle: false,
       x: 1,
       y: 3,
     });
     response = rover.execCommands("LFRFFLFFFLL");
     expect(response).toStrictEqual({
       direction: 180,
-      hasObstacle: 0,
+      hasObstacle: false,
       x: 0,
       y: 1,
     });
