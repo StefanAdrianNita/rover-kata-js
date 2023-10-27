@@ -1,4 +1,10 @@
+export const ROVER_SYMBOL = 5;
+export const OBSTACLE_SYMBOL = 1;
+export const FREE_SYMBOL = 0;
+
+
 export default class Rover {
+
   #x = 0;
   #y = 0;
   #direction = 90;
@@ -21,7 +27,7 @@ export default class Rover {
   }
 
   #checkForObstacle(y, x) {
-    return this.#grid[y][x] === 1;
+    return this.#grid[y][x] === OBSTACLE_SYMBOL;
   }
 
   #wrapAround(coord, max) {
@@ -37,15 +43,14 @@ export default class Rover {
     };
 
     const { dy, dx } = directionMap[this.#direction];
-    const newPosition = [
-      this.#wrapAround(this.#y + (fwd ? dy : -dy), this.#grid.length),
-      this.#wrapAround(this.#x + (fwd ? dx : -dx), this.#grid[0].length),
-    ];
 
-    if (this.#checkForObstacle(...newPosition)) return true;
+    const newY = this.#wrapAround(this.#y + (fwd ? dy : -dy), this.#grid.length);
+    const newX = this.#wrapAround(this.#x + (fwd ? dx : -dx), this.#grid[0].length);
 
-    this.#y = newPosition[0];
-    this.#x = newPosition[1];
+    if (this.#checkForObstacle(newY, newX)) return true;
+
+    this.#y = newY;
+    this.#x = newX;
     return false;
   }
 
@@ -63,12 +68,12 @@ export default class Rover {
     console.log(
       `Rover is at ${this.#x}, ${this.#y}, facing ${this.#direction} degrees`
     );
-
-    this.#grid[this.#y][this.#x] = 5;
+    
+    this.#grid[this.#y][this.#x] = ROVER_SYMBOL;
     this.#grid.reverse();
     console.log(this.#grid);
     this.#grid.reverse();
-    this.#grid[this.#y][this.#x] = 0;
+    this.#grid[this.#y][this.#x] = FREE_SYMBOL;
   }
 
   execCommands(command) {

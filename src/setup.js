@@ -1,5 +1,6 @@
 import Rover from "./Rover.js";
 import {writeOutput} from "./iostream.js";
+import {OBSTACLE_SYMBOL, FREE_SYMBOL} from "./Rover.js";
 
 export const extractObstacles = (inputArray) => {
     return inputArray
@@ -10,14 +11,14 @@ export const extractObstacles = (inputArray) => {
 export const createGrid = (inputArray) => {
     const grid = [];
     for (let i = 0, gridSizeY = inputArray[1][2]; i < gridSizeY; i++) {
-        const row = Array(Number(inputArray[1][1])).fill(0);
+        const row = Array(Number(inputArray[1][1])).fill(FREE_SYMBOL);
         grid.push(row);
     }
     return grid;
 }
 export const placeObstacles = (grid, obstacleList) => {
     for (let i = 0, nrObstacles = obstacleList.length; i < nrObstacles; i++) {
-        grid[obstacleList[i][0]][obstacleList[i][1]] = 1;
+        grid[obstacleList[i][0]][obstacleList[i][1]] = OBSTACLE_SYMBOL;
     }
 }
 export const extractCommandList = (inputArray) => {
