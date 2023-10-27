@@ -59,28 +59,38 @@ export default class Rover {
     }
   }
 
+  #outputAndDebug() {
+    console.log(
+      `Rover is at ${this.#x}, ${this.#y}, facing ${this.#direction} degrees`
+    );
+
+    this.#grid[this.#y][this.#x] = 5;
+    this.#grid.reverse();
+    console.log(this.#grid);
+    this.#grid.reverse();
+    this.#grid[this.#y][this.#x] = 0;
+  }
+
   execCommands(command) {
     const commandArray = command.split("");
     let hasObstacle = false;
     commandArray.forEach((command) => {
-      if (command === "F") {
-        hasObstacle = this.#move(true);
-      } else if (command === "L" || command === "R") {
-        this.#turn(command);
-      } else if (command === "B") {
-        hasObstacle = this.#move(false);
-      }
-      console.log(
-        `Rover is at ${this.#x}, ${this.#y}, facing ${this.#direction} degrees`
-      );
+      hasObstacle = this.execCommand(command, hasObstacle);
 
-      this.#grid[this.#y][this.#x] = 5;
-      this.#grid.reverse();
-      console.log(this.#grid);
-      this.#grid.reverse();
-      this.#grid[this.#y][this.#x] = 0;
+      this.#outputAndDebug();
     });
 
     return { hasObstacle, x: this.#x, y: this.#y, direction: this.#direction };
+  }
+
+  execCommand(command, hasObstacle) {
+    if (command === "F") {
+      hasObstacle = this.#move(true);
+    } else if (command === "L" || command === "R") {
+      this.#turn(command);
+    } else if (command === "B") {
+      hasObstacle = this.#move(false);
+    }
+    return hasObstacle;
   }
 }
